@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拷问 KaoWen — 决策压力测试器</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>拷问 <em>KaoWen</em></h1>
+  <p class="tagline">决策压力测试器 — 三个拷问官从不同角度审视你的决策，一个主持人综合裁决。不讨好你，只帮你想清楚。</p>
+</header>
+
+<main class="main">
+  <!-- Examples -->
+  <div class="examples" id="examples">
+    <button class="example-chip" data-text="我在考虑辞掉稳定的国企工作，转行做独立开发者">辞职转行</button>
+    <button class="example-chip" data-text="准备花300万在三线城市买一套学区房，孩子3年后上小学">买学区房</button>
+    <button class="example-chip" data-text="想拿出50万积蓄投入朋友的奶茶店加盟，他说年回报率30%">投资奶茶店</button>
+    <button class="example-chip" data-text="打算放弃考研，直接找工作。目前大三，计算机专业，双非院校">放弃考研</button>
+    <button class="example-chip" data-text="想裸辞去gap year，环游东南亚半年，目前存款15万">裸辞Gap Year</button>
+    <button class="example-chip" data-text="准备贷款30万买一辆新能源车，月薪1.2万，每月房贷4000">贷款买车</button>
+  </div>
+
+  <!-- Input -->
+  <div class="input-area">
+    <textarea id="decision-input" placeholder="描述你正在纠结的决策...&#10;&#10;越具体越好：包括你的背景、金额、时间线、顾虑等"></textarea>
+    <div class="input-bottom">
+      <span class="char-count" id="char-count">0 字</span>
+      <button class="btn-go" id="btn-go">开始拷问</button>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div class="error-msg" id="error-msg"></div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="loading-title">拷问进行中...</div>
+    <div class="loading-steps">
+      <div class="loading-step" id="step-1">
+        <div class="indicator">1</div>
+        <span>风险猎人正在搜索隐藏的陷阱和最坏情况...</span>
+      </div>
+      <div class="loading-step" id="step-2">
+        <div class="indicator">2</div>
+        <span>现实核查员正在质疑你的每一个假设...</span>
+      </div>
+      <div class="loading-step" id="step-3">
+        <div class="indicator">3</div>
+        <span>机会侦察兵正在发现你忽略的可能性...</span>
+      </div>
+      <div class="loading-step" id="step-4">
+        <div class="indicator">4</div>
+        <span>主持人正在综合裁决...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results"></div>
+</main>
+
+<!-- Settings trigger -->
+<button class="settings-trigger" id="settings-btn" title="API 设置">&#9881;</button>
+
+<!-- Settings modal -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal">
+    <h2>API 设置</h2>
+    <div class="field">
+      <label>服务提供商</label>
+      <select id="provider">
+        <option value="custom">自定义 OpenAI 兼容</option>
+        <option value="deepseek">DeepSeek</option>
+        <option value="openai">OpenAI</option>
+        <option value="siliconflow">SiliconFlow 硅基流动</option>
+        <option value="openrouter">OpenRouter</option>
+        <option value="groq">Groq</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>API Base URL</label>
+      <input type="url" id="base-url" placeholder="https://api.openai.com/v1">
+      <div class="hint">OpenAI 兼容接口地址，以 /v1 结尾</div>
+    </div>
+    <div class="field">
+      <label>API Key</label>
+      <input type="password" id="api-key" placeholder="sk-...">
+    </div>
+    <div class="field">
+      <label>模型名称</label>
+      <input type="text" id="model-name" placeholder="gpt-5-mini">
+      <div class="hint">如 gpt-5-mini, gpt-5, deepseek-chat, Qwen/Qwen3-8B 等</div>
+    </div>
+    <p class="local-hint">API 信息仅保存在本地浏览器中，不会上传到任何服务器</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="btn-cancel">取消</button>
+      <button class="btn-go" id="btn-save">保存</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
